@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QA Locations MVP</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <header class="page-header">
+        <h1>QA Locations</h1>
+      </header>
+
+      <section id="main-view" class="card">
+        <div class="section-header">
+          <h2>Input</h2>
+          <div class="header-actions">
+            <button
+              id="open-imports-btn"
+              type="button"
+              class="secondary compact-btn"
+            >
+              Open Imports
+            </button>
+            <button
+              id="open-settings"
+              type="button"
+              class="icon-btn"
+              title="Settings"
+            >
+              ⚙️
+            </button>
+          </div>
+        </div>
+
+        <div class="inputs-grid">
+          <div class="input-group">
+            <label>Locations</label>
+            <div class="input-actions">
+              <div class="input-actions-row">
+                <button
+                  id="pick-locations-btn"
+                  type="button"
+                  class="secondary import-btn"
+                >
+                  Select Locations (.csv)
+                </button>
+              </div>
+              <p id="locations-import-status" class="field-status">
+                Opens importer page
+              </p>
+            </div>
+            <p class="helper">Locations are loaded from CSV import only.</p>
+            <input
+              id="locations-file"
+              type="file"
+              accept=".csv,text/csv"
+              hidden
+            />
+          </div>
+          <div class="input-group">
+            <label>Priorities</label>
+            <div class="input-actions">
+              <div class="input-actions-row">
+                <button
+                  id="pick-priorities-btn"
+                  type="button"
+                  class="secondary import-btn"
+                >
+                  Select Priorities (.xlsx)
+                </button>
+              </div>
+              <p id="priorities-import-status" class="field-status">
+                Opens importer page
+              </p>
+            </div>
+            <p class="helper">Priority data is loaded from XLSX import only.</p>
+            <input
+              id="priorities-file"
+              type="file"
+              accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              hidden
+            />
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button id="create" type="button">Create</button>
+          <button id="reset" type="button" class="secondary">Reset</button>
+        </div>
+      </section>
+
+      <section id="settings-view" class="card hidden" aria-live="polite">
+        <div class="section-header">
+          <h2>Settings</h2>
+          <button
+            id="close-settings"
+            type="button"
+            class="icon-btn"
+            title="Back to input"
+          >
+            ✕
+          </button>
+        </div>
+
+        <p class="helper">
+          Create columns, rename titles, and set the letter mappings.
+        </p>
+
+        <div id="groups-list" class="groups-list"></div>
+
+        <button id="add-group" type="button" class="secondary">
+          Add Column
+        </button>
+
+        <div class="settings-grid">
+          <div>
+            <label for="max-rows">Max rows per column (0 = no limit)</label>
+            <input id="max-rows" type="number" min="0" value="20" />
+          </div>
+          <div>
+            <label for="column-gap">Column gap</label>
+            <input id="column-gap" type="number" min="0" value="1" />
+          </div>
+          <div>
+            <label class="settings-theme" for="theme-mode">
+              Theme
+              <select id="theme-mode">
+                <option value="system">System</option>
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-toggle">
+          <label class="checkbox">
+            <input id="colors-mode" type="checkbox" />
+            Colors mode (red/yellow/green)
+          </label>
+          <label class="checkbox">
+            <input id="hold-view" type="checkbox" />
+            Hold last view on reopen
+          </label>
+        </div>
+
+        <div class="buttons">
+          <button id="settings-reset" type="button" class="secondary">
+            Reset
+          </button>
+          <button id="settings-save" type="button">Save</button>
+        </div>
+      </section>
+
+      <section id="result-view" class="card hidden" aria-live="polite">
+        <div class="section-header">
+          <h2>Arrangement</h2>
+          <div class="header-actions">
+            <button
+              id="copy-table-image"
+              type="button"
+              class="secondary compact-btn"
+            >
+              Copy PNG
+            </button>
+            <button
+              id="save-table-image"
+              type="button"
+              class="secondary compact-btn"
+            >
+              Save PNG
+            </button>
+            <button
+              id="result-back"
+              type="button"
+              class="icon-btn"
+              title="Back to input"
+            >
+              ↩
+            </button>
+          </div>
+        </div>
+
+        <p id="summary" class="helper"></p>
+        <p
+          id="result-action-status"
+          class="field-status"
+          aria-live="polite"
+        ></p>
+        <div id="table-container"></div>
+      </section>
+    </main>
+
+    <script src="logic.js"></script>
+    <script src="vendor/xlsx.full.min.js"></script>
+    <script src="vendor/html2canvas.min.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

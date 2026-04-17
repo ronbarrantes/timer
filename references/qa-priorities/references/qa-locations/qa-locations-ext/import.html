@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QA Locations Import</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="import-page">
+    <main>
+      <section class="card import-shell">
+        <div class="section-header">
+          <h2>Import Data</h2>
+          <div class="header-actions">
+            <button id="close-import" type="button" class="icon-btn" title="Close importer"></button>
+          </div>
+        </div>
+
+        <p class="helper">
+          Import files here to avoid popup-close interruptions. Data is saved to extension storage and will
+          appear in the popup inputs.
+        </p>
+
+        <div class="import-grid">
+          <section class="import-panel">
+            <div class="import-panel-header">
+              <h3>Locations</h3>
+              <button id="pick-locations" type="button" class="secondary import-btn">
+                Select locations.csv
+              </button>
+              <input id="locations-file" type="file" accept=".csv,text/csv" hidden />
+            </div>
+            <p id="locations-status" class="field-status" aria-live="polite"></p>
+            <label for="locations-preview">Imported Locations Preview</label>
+            <textarea id="locations-preview" readonly></textarea>
+          </section>
+
+          <section class="import-panel">
+            <div class="import-panel-header">
+              <h3>Priorities</h3>
+              <button id="pick-priorities" type="button" class="secondary import-btn">
+                Select priorities.xlsx
+              </button>
+              <input
+                id="priorities-file"
+                type="file"
+                accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                hidden
+              />
+            </div>
+            <p id="priorities-status" class="field-status" aria-live="polite"></p>
+            <label for="priorities-preview">Imported Priorities Preview</label>
+            <textarea id="priorities-preview" readonly></textarea>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="logic.js"></script>
+    <script src="vendor/xlsx.full.min.js"></script>
+    <script src="import.js"></script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do Priorities</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section id="main-view" class="view-shell card">
+        <header class="toolbar">
+          <h1>To-Do Priorities</h1>
+          <div class="toolbar-actions">
+            <button id="import-btn" type="button" class="secondary">Import Priorities (.xlsx)</button>
+            <button id="open-settings" type="button" class="icon-btn" title="Settings">⚙️</button>
+          </div>
+          <input id="file-input" type="file" accept=".xlsx,.xls" hidden />
+        </header>
+
+        <p id="status" class="status"></p>
+
+        <div id="grouped-tables" class="tables-stack"></div>
+      </section>
+
+      <section id="settings-view" class="view-shell card hidden" aria-live="polite">
+        <div class="section-header">
+          <h2>Settings</h2>
+          <button id="close-settings" type="button" class="icon-btn" title="Back to to-dos">✕</button>
+        </div>
+
+        <p class="helper">Create columns, rename titles, set letter mappings, and manage time display options.</p>
+
+        <div class="settings-grid">
+          <div>
+            <label class="settings-theme" for="theme-mode">
+              Theme
+              <select id="theme-mode">
+                <option value="system">System</option>
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <label class="toggle-row checkbox" for="settings-dst-toggle">
+          <span>Daylight savings adjustment (-1 hour)</span>
+          <input id="settings-dst-toggle" type="checkbox" />
+        </label>
+
+        <div id="groups-list" class="groups-list"></div>
+
+        <button id="add-group" type="button" class="secondary">Add Column</button>
+
+        <div class="buttons">
+          <button id="settings-reset" type="button" class="secondary">Reset</button>
+          <button id="settings-save" type="button">Save</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="vendor/xlsx.full.min.js"></script>
+    <script src="logic.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

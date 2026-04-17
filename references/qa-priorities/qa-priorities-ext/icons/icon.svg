@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="QA Priorities icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="128" height="128" fill="url(#bg)" />
+
+  <!-- Stylized P -->
+  <path
+    d="M40 28 L40 100"
+    fill="none"
+    stroke="#facc15"
+    stroke-width="10"
+    stroke-linecap="round"
+  />
+  <circle
+    cx="58"
+    cy="52"
+    r="20"
+    fill="none"
+    stroke="#facc15"
+    stroke-width="10"
+    stroke-linecap="round"
+  />
+
+  <!-- Stylized 1 -->
+  <path
+    d="M88 36 L88 100"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="10"
+    stroke-linecap="round"
+  />
+  <path
+    d="M80 44 L88 36"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="10"
+    stroke-linecap="round"
+  />
+</svg>

@@ -1,8 +1,0 @@
-{
-  "name": "qa-priorities",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "build:zip": "./build-zip.sh"
-  }
-}

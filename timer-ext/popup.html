@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QA Timer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="designs.css" />
+  </head>
+  <body data-state="idle">
+    <main>
+      <!-- Header: hidden while running -->
+      <header class="page-header">
+        <span class="page-title">⏱ Timer</span>
+        <button id="open-settings" class="icon-btn" title="Settings">⚙️</button>
+      </header>
+
+      <!-- Timer: always visible, grows to fill when running -->
+      <div id="timer-wrap" class="timer-wrap">
+        <div id="timer-display" class="timer-display" aria-live="off">05:00</div>
+        <p id="timer-label" class="timer-label" aria-live="polite"></p>
+        <span class="pause-hint" aria-hidden="true">tap to pause</span>
+      </div>
+
+      <!-- Idle: presets + custom input + start -->
+      <div class="idle-controls">
+        <div class="presets" role="group" aria-label="Quick presets">
+          <button class="preset-btn secondary" type="button" data-mins="1">1 min</button>
+          <button class="preset-btn secondary" type="button" data-mins="2">2 min</button>
+          <button class="preset-btn secondary" type="button" data-mins="5">5 min</button>
+          <button class="preset-btn secondary" type="button" data-mins="10">10 min</button>
+        </div>
+        <div class="custom-time-row">
+          <input
+            id="custom-mins"
+            type="number"
+            min="0.1"
+            step="0.5"
+            placeholder="Custom (min)"
+            aria-label="Custom duration in minutes"
+          />
+          <button id="set-custom-btn" type="button" class="secondary compact-btn">Set</button>
+        </div>
+        <button id="start-btn" type="button">Start</button>
+      </div>
+
+      <!-- Paused: continue + reset -->
+      <div class="paused-controls">
+        <button id="continue-btn" type="button">Continue</button>
+        <button id="reset-btn" type="button" class="secondary">Reset</button>
+      </div>
+
+      <!-- Done: reset only -->
+      <div class="done-controls">
+        <button id="done-reset-btn" type="button" class="secondary">Reset</button>
+      </div>
+    </main>
+
+    <!-- Settings: fixed overlay -->
+    <section id="settings-panel" class="settings-panel hidden" aria-label="Settings">
+      <div class="section-header">
+        <h2>Settings</h2>
+        <button id="close-settings" type="button" class="icon-btn" title="Back">✕</button>
+      </div>
+
+      <div class="design-section">
+        <span class="design-section-label">Design</span>
+        <div class="design-cards" role="group" aria-label="Choose a design">
+          <button class="design-card" data-design="default" type="button" aria-pressed="true">
+            <span class="design-card-swatch"></span>
+            <span class="design-card-name">Default</span>
+          </button>
+          <button class="design-card" data-design="walmart" type="button" aria-pressed="false">
+            <span class="design-card-swatch"></span>
+            <span class="design-card-name">Walmart</span>
+          </button>
+          <button class="design-card" data-design="glass" type="button" aria-pressed="false">
+            <span class="design-card-swatch"></span>
+            <span class="design-card-name">Glass</span>
+          </button>
+          <button class="design-card" data-design="neon" type="button" aria-pressed="false">
+            <span class="design-card-swatch"></span>
+            <span class="design-card-name">Neon</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="settings-theme-row">
+        <label for="theme-mode">Theme</label>
+        <select id="theme-mode">
+          <option value="system">System</option>
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </div>
+
+      <div class="settings-footer">
+        <button id="settings-discard" type="button" class="secondary">Discard</button>
+        <button id="settings-save" type="button">Save</button>
+      </div>
+    </section>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

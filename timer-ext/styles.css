@@ -1,0 +1,549 @@
+/* ── Variables: Dark (default) ──────────────────────────────────────────────── */
+
+:root {
+  color-scheme: dark;
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  --bg: #0b0f17;
+  --surface: #111827;
+  --surface-2: #0f1625;
+  --text: #e5e7eb;
+  --muted: #a8b4c4;
+  --muted-2: rgba(168, 180, 196, 0.7);
+  --border: rgba(148, 163, 184, 0.32);
+  --border-strong: rgba(148, 163, 184, 0.48);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --accent: #7c3aed;
+  --ring: rgba(124, 58, 237, 0.32);
+  --secondary-hover: #243044;
+  --button-primary-bg: #e5e7eb;
+  --button-primary-text: #0b0f17;
+  --button-primary-border: rgba(229, 231, 235, 0.4);
+  --button-primary-hover-bg: #ffffff;
+  --button-secondary-bg: #1e293b;
+  --button-secondary-text: var(--text);
+  --button-secondary-border: rgba(148, 163, 184, 0.45);
+  --button-secondary-hover-bg: var(--secondary-hover);
+  --icon-button-hover-bg: #1a2640;
+  --icon-button-hover-border: rgba(148, 163, 184, 0.48);
+  --input-focus-bg: #0b1224;
+  --settings-header-gradient: linear-gradient(
+    180deg,
+    rgba(17, 24, 39, 0.98) 0%,
+    rgba(17, 24, 39, 0.92) 78%,
+    rgba(17, 24, 39, 0) 100%
+  );
+  --radius: 14px;
+  --radius-sm: 10px;
+}
+
+/* ── Variables: Light ───────────────────────────────────────────────────────── */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --text: #0f172a;
+  --muted: #475569;
+  --muted-2: rgba(71, 85, 105, 0.6);
+  --border: rgba(15, 23, 42, 0.16);
+  --border-strong: rgba(15, 23, 42, 0.24);
+  --shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  --accent: #6d28d9;
+  --ring: rgba(109, 40, 217, 0.25);
+  --secondary-hover: #e2e8f0;
+  --button-primary-bg: #1f2937;
+  --button-primary-text: #f8fafc;
+  --button-primary-border: rgba(15, 23, 42, 0.35);
+  --button-primary-hover-bg: #111827;
+  --button-secondary-bg: #e2e8f0;
+  --button-secondary-text: #0f172a;
+  --button-secondary-border: rgba(15, 23, 42, 0.16);
+  --button-secondary-hover-bg: #cbd5e1;
+  --icon-button-hover-bg: #e2e8f0;
+  --icon-button-hover-border: rgba(15, 23, 42, 0.28);
+  --input-focus-bg: #f8fafc;
+  --settings-header-gradient: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 255, 255, 0.92) 78%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+/* ── Reset & Base ───────────────────────────────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 480px;
+  height: 420px;
+  overflow: hidden;      /* no scrollbars, ever */
+  background: var(--bg);
+  color: var(--text);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 12px;
+  gap: 8px;
+}
+
+/* ── Typography ─────────────────────────────────────────────────────────────── */
+
+h1, h2 {
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+h1 { font-size: 1rem; }
+h2 { font-size: 0.95rem; font-weight: 600; }
+
+/* ── Page Header ────────────────────────────────────────────────────────────── */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+}
+
+.page-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ── Form Elements ──────────────────────────────────────────────────────────── */
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+input, select, button {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: inherit;
+  font-family: inherit;
+  font-size: 0.875rem;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+input:hover, select:hover {
+  border-color: var(--border-strong);
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--ring);
+  background: var(--input-focus-bg);
+}
+
+input::placeholder {
+  color: var(--muted-2);
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────────── */
+
+button {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border-color: var(--button-primary-border);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+button:hover     { background: var(--button-primary-hover-bg); }
+button:active    { transform: translateY(1px); }
+button:disabled  { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.22);
+}
+
+button.secondary {
+  background: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  border-color: var(--button-secondary-border);
+}
+button.secondary:hover { background: var(--button-secondary-hover-bg); }
+
+button.icon-btn {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 1rem;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text);
+  border-color: transparent;
+  display: grid;
+  place-items: center;
+}
+button.icon-btn:hover {
+  background: var(--icon-button-hover-bg);
+  border-color: var(--icon-button-hover-border);
+}
+
+button.compact-btn {
+  width: auto;
+  padding: 0 14px;
+  height: 36px;
+  white-space: nowrap;
+}
+
+.hidden { display: none; }
+
+/* ── State Visibility ───────────────────────────────────────────────────────── */
+/* Sections hidden per timer state via body[data-state] */
+
+/* idle: hide paused + done */
+body[data-state="idle"] .paused-controls { display: none; }
+body[data-state="idle"] .done-controls   { display: none; }
+
+/* running: hide everything except timer-wrap */
+body[data-state="running"] .page-header     { display: none; }
+body[data-state="running"] .idle-controls   { display: none; }
+body[data-state="running"] .paused-controls { display: none; }
+body[data-state="running"] .done-controls   { display: none; }
+
+/* paused: hide idle + done */
+body[data-state="paused"] .idle-controls  { display: none; }
+body[data-state="paused"] .done-controls  { display: none; }
+
+/* done: hide idle + paused */
+body[data-state="done"] .idle-controls   { display: none; }
+body[data-state="done"] .paused-controls { display: none; }
+
+/* ── Timer Wrap ─────────────────────────────────────────────────────────────── */
+
+.timer-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: var(--radius);
+  transition: background 0.2s ease;
+  min-height: 0;            /* prevents flex blowout */
+}
+
+body[data-state="running"] .timer-wrap {
+  cursor: pointer;
+}
+
+body[data-state="running"] .timer-wrap:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+:root[data-theme="light"] body[data-state="running"] .timer-wrap:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* ── Timer Display ──────────────────────────────────────────────────────────── */
+
+.timer-display {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-align: center;
+  user-select: none;
+  color: var(--text);
+  font-size: 16vw;          /* idle/default */
+  transition: font-size 0.25s ease, color 0.4s ease;
+}
+
+body[data-state="running"] .timer-display { font-size: 28vw; }
+body[data-state="paused"]  .timer-display { font-size: 24vw; }
+body[data-state="done"]    .timer-display { font-size: 28vw; }
+
+/* ── Phase Colors (percentage-based) ───────────────────────────────────────── */
+
+/* running, no threshold hit — crisp text color, accent reserved for UI chrome */
+.timer-display.phase-running { color: var(--text); }
+
+/* ≤ 50% — warm yellow */
+.timer-display.phase-caution { color: #fde047; }
+:root[data-theme="light"] .timer-display.phase-caution { color: #ca8a04; }
+
+/* ≤ 25% — orange */
+.timer-display.phase-warning { color: #fb923c; }
+:root[data-theme="light"] .timer-display.phase-warning { color: #c2410c; }
+
+/* ≤ 10% — red, slow pulse — lighter shade so it reads on dark bg */
+.timer-display.phase-danger {
+  color: #f87171;
+  animation: pulse-slow 1.2s ease-in-out infinite;
+}
+:root[data-theme="light"] .timer-display.phase-danger { color: #dc2626; }
+
+/* ≤ 5% — red, fast aggressive pulse */
+.timer-display.phase-panic {
+  color: #f87171;
+  animation: pulse-fast 0.45s ease-in-out infinite;
+}
+:root[data-theme="light"] .timer-display.phase-panic { color: #dc2626; }
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.65; } /* was 0.55 — stays legible while pulsing */
+}
+
+@keyframes pulse-fast {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }  /* was 0.3 — 30% opacity on dark bg is basically invisible */
+}
+
+/* ── Timer Label (shown when paused) ───────────────────────────────────────── */
+
+.timer-label {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+  min-height: 1em;
+}
+
+/* ── Pause Hint ─────────────────────────────────────────────────────────────── */
+
+.pause-hint {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: var(--muted);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.25s ease;
+}
+
+body[data-state="running"] .timer-wrap:hover .pause-hint {
+  opacity: 0.75;
+}
+
+/* ── Idle Controls ──────────────────────────────────────────────────────────── */
+
+.idle-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.presets {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.preset-btn {
+  height: 34px;
+  padding: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.preset-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--button-secondary-bg);
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.custom-time-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+  align-items: center;
+}
+
+.custom-time-row input {
+  height: 36px;
+  padding: 0 10px;
+}
+
+#start-btn {
+  height: 38px;
+}
+
+/* ── Paused Controls ────────────────────────────────────────────────────────── */
+
+.paused-controls {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.paused-controls button {
+  height: 38px;
+}
+
+/* ── Done Controls ──────────────────────────────────────────────────────────── */
+
+.done-controls {
+  flex: 0 0 auto;
+}
+
+.done-controls button {
+  height: 38px;
+}
+
+/* ── Settings Panel (fixed overlay) ────────────────────────────────────────── */
+
+.settings-panel {
+  position: fixed;
+  inset: 0;
+  background: var(--surface);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  z-index: 20;
+  overflow-y: auto;
+}
+
+/* Needs higher specificity than .settings-panel { display: flex } above */
+.settings-panel.hidden { display: none; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+  position: sticky;
+  top: 0;
+  background: var(--settings-header-gradient);
+  backdrop-filter: blur(4px);
+  padding: 2px 0 10px;
+}
+
+.settings-theme-row {
+  margin-bottom: 16px;
+}
+
+.settings-footer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+/* ── Design Cards ───────────────────────────────────────────────────────────── */
+
+.design-section { margin-bottom: 4px; }
+
+.design-section-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+.design-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.design-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  padding: 10px 6px 8px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  box-shadow: none;
+  overflow: hidden;
+  transition:
+    border-color 0.18s ease,
+    color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.design-card:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: var(--secondary-hover);
+  filter: none;
+}
+
+.design-card:active { transform: translateY(1px); }
+
+.design-card[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--text);
+  background: var(--secondary-hover);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.design-card-swatch {
+  display: block;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform 0.18s ease;
+}
+
+.design-card[aria-pressed="true"] .design-card-swatch { transform: scale(1.12); }
+
+.design-card[data-design="default"] .design-card-swatch {
+  background: conic-gradient(#7c3aed 0% 50%, #8b5cf6 50% 100%);
+}
+.design-card[data-design="walmart"] .design-card-swatch {
+  background: conic-gradient(#0053e2 0% 50%, #ffc220 50% 100%);
+}
+.design-card[data-design="glass"] .design-card-swatch {
+  background: conic-gradient(#a78bfa 0% 40%, #818cf8 40% 80%, rgba(255,255,255,0.3) 80% 100%);
+}
+.design-card[data-design="neon"] .design-card-swatch {
+  background: conic-gradient(#00e0ff 0% 50%, #a78bfa 50% 100%);
+  box-shadow: 0 0 8px rgba(0, 224, 255, 0.4);
+}
+
+.design-card-name {
+  line-height: 1;
+  text-align: center;
+}

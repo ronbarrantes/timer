@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "QA Timer",
+  "author": "Ron Barrantes <ronbarrantes@gmail.com>",
+  "description": "A quick countdown timer with presets and persistent state.",
+  "version": "1.0.0",
+  "permissions": ["storage", "alarms", "notifications"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "QA Timer",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    },
+    "default_popup": "popup.html"
+  }
+}

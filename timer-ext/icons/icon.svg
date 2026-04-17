@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="QA Timer icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#2e1065"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="128" height="128" rx="26" fill="url(#bg)"/>
+
+  <!-- Crown / stem -->
+  <rect x="56" y="11" width="16" height="11" rx="5.5" fill="#5b21b6"/>
+
+  <!-- Track ring (background of progress) -->
+  <circle cx="64" cy="74" r="38" fill="none" stroke="#2d2060" stroke-width="7"/>
+
+  <!-- Progress arc — 75% remaining (270° clockwise from 12 o'clock to 9 o'clock) -->
+  <!-- M 64,36 = top (12 o'clock); endpoint 26,74 = left (9 o'clock); large-arc=1, sweep=1 -->
+  <path d="M 64 36 A 38 38 0 1 1 26 74"
+        fill="none" stroke="#7c3aed" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Inner face -->
+  <circle cx="64" cy="74" r="27" fill="#1e1b4b"/>
+
+  <!-- Minute hand — pointing to 12 o'clock -->
+  <line x1="64" y1="74" x2="64" y2="54"
+        stroke="#f1f5f9" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Hour hand — pointing to ~2 o'clock -->
+  <line x1="64" y1="74" x2="76" y2="67"
+        stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Center pin -->
+  <circle cx="64" cy="74" r="5"   fill="#7c3aed"/>
+  <circle cx="64" cy="74" r="2.5" fill="#ddd6fe"/>
+</svg>

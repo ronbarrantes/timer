@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Icon Generator — QA Timer</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0f0f1a;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      gap: 32px;
+    }
+    h1  { font-size: 1.1rem; font-weight: 700; color: #a78bfa; margin: 0; }
+    p   { margin: 0; font-size: 0.85rem; color: #9aa4b2; text-align: center; }
+    code { background: #1e1b4b; padding: 1px 5px; border-radius: 4px; font-size: 0.82rem; }
+    .previews {
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .preview-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    canvas {
+      border-radius: 6px;
+      image-rendering: pixelated;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    }
+    .size-label { font-size: 0.75rem; color: #9aa4b2; }
+    .dl-btn {
+      padding: 5px 12px;
+      background: #4c1d95;
+      color: #ddd6fe;
+      border: 1px solid #6d28d9;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .dl-btn:hover { background: #6d28d9; color: #fff; }
+    #dl-all {
+      padding: 10px 28px;
+      background: #7c3aed;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    #dl-all:hover { background: #8b5cf6; }
+    #status { font-size: 0.82rem; color: #34d399; min-height: 1em; }
+  </style>
+</head>
+<body>
+  <h1>⏱ QA Timer — Icon Generator</h1>
+  <p>Open this file in Chrome, hit Download All, then move the<br/>
+     four PNGs into your <code>icons/</code> folder, replacing the old ones.</p>
+
+  <div class="previews" id="previews"></div>
+  <p id="status"></p>
+  <button id="dl-all">⬇ Download All 4 PNGs</button>
+
+  <script>
+    // SVG embedded directly — no fetch() needed, works on file://
+    const SVG_SRC = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="QA Timer icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#2e1065"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="26" fill="url(#bg)"/>
+  <rect x="56" y="11" width="16" height="11" rx="5.5" fill="#5b21b6"/>
+  <circle cx="64" cy="74" r="38" fill="none" stroke="#2d2060" stroke-width="7"/>
+  <path d="M 64 36 A 38 38 0 1 1 26 74"
+        fill="none" stroke="#7c3aed" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="64" cy="74" r="27" fill="#1e1b4b"/>
+  <line x1="64" y1="74" x2="64" y2="54"
+        stroke="#f1f5f9" stroke-width="5" stroke-linecap="round"/>
+  <line x1="64" y1="74" x2="76" y2="67"
+        stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="64" cy="74" r="5"   fill="#7c3aed"/>
+  <circle cx="64" cy="74" r="2.5" fill="#ddd6fe"/>
+</svg>`;
+
+    const SIZES    = [16, 32, 48, 128];
+    const canvases = {};
+
+    function svgToImage(size) {
+      return new Promise((resolve, reject) => {
+        const blob = new Blob([SVG_SRC], { type: "image/svg+xml" });
+        const url  = URL.createObjectURL(blob);
+        const img  = new Image(size, size);
+        img.onload  = () => { URL.revokeObjectURL(url); resolve(img); };
+        img.onerror = reject;
+        img.src = url;
+      });
+    }
+
+    async function renderCanvas(size) {
+      const canvas  = document.createElement("canvas");
+      canvas.width  = size;
+      canvas.height = size;
+      const img = await svgToImage(size);
+      canvas.getContext("2d").drawImage(img, 0, 0, size, size);
+      return canvas;
+    }
+
+    function download(canvas, filename) {
+      const a    = document.createElement("a");
+      a.download = filename;
+      a.href     = canvas.toDataURL("image/png");
+      a.click();
+    }
+
+    async function init() {
+      const container = document.getElementById("previews");
+
+      for (const size of SIZES) {
+        const canvas      = await renderCanvas(size);
+        canvases[size]    = canvas;
+
+        // Show enlarged so the tiny ones are actually visible
+        const display     = Math.max(size, 64);
+        canvas.style.width  = display + "px";
+        canvas.style.height = display + "px";
+
+        const label       = document.createElement("span");
+        label.className   = "size-label";
+        label.textContent = `${size} × ${size}`;
+
+        const btn         = document.createElement("button");
+        btn.className     = "dl-btn";
+        btn.textContent   = "Download";
+        btn.onclick       = () => download(canvas, `icon${size}.png`);
+
+        const item        = document.createElement("div");
+        item.className    = "preview-item";
+        item.append(canvas, label, btn);
+        container.append(item);
+      }
+
+      document.getElementById("dl-all").onclick = () => {
+        SIZES.forEach(s => download(canvases[s], `icon${s}.png`));
+        document.getElementById("status").textContent =
+          "✓ Done! Move the 4 PNGs into your icons/ folder and reload the extension.";
+      };
+    }
+
+    init().catch(err => {
+      document.getElementById("status").textContent = "❌ " + err.message;
+    });
+  </script>
+</body>
+</html>
